@@ -18,7 +18,7 @@ class cd:
 
 
 def analyze_files(openface, rootdir, outputdir, suffix = ''):
-    """"Analyzes all files found in rootdir that end with suffix using OpenFace locted at openface. 
+    """"Analyzes all files found in rootdir that end with suffix using OpenFace located at openface. 
     The output is stored in outputdir."""
     list_of_files = []
     subdirs = []
