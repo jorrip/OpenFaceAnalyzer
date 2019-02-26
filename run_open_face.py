@@ -57,11 +57,10 @@ def analyze_files(openface, rootdir, outputdir, suffix = ''):
     
     else:
         print("No files to analyze.")
+        
 
-
-if __name__== "__main__":
-    # params parser
-    parser = argparse.ArgumentParser()
+def parse_args():
+    parser = argparse.ArgumentParser(description='OpenFace helper')
     parser.add_argument('-root', nargs='?', dest='root',
                         help='The root directory of the videos. This dir can either contain only videos or subdirectories with videos.',
                         required=True)
@@ -74,25 +73,28 @@ if __name__== "__main__":
     parser.add_argument('-suf', nargs='?', dest='suffix',
                         help='Suffix of the files to be analyzed (e.g. "face.mpg"). If no suffix is specified, all files in rootdir will be analyzed.',
                         required=False)
-    results = parser.parse_args()
-    
-    
+    return parser.parse_args()
+
+
+if __name__== "__main__":
+    # params parser
+    args = parse_args()
     # check params
-    if not os.path.isfile(results.open):
-        print(results.open + " is not the path to the FeatureExtraction.exe file from OpenFace.")
+    if not os.path.isfile(args.open):
+        print(args.open + " is not the path to the FeatureExtraction.exe file from OpenFace.")
         sys.exit()
-    if not os.path.isdir(results.root):
-        print(results.root + " is not a directory.")
+    if not os.path.isdir(args.root):
+        print(args.root + " is not a directory.")
         sys.exit()
-    if not os.path.isdir(results.output):
-        print(results.output + " is not a directory.")
+    if not os.path.isdir(args.output):
+        print(args.output + " is not a directory.")
         sys.exit()
     
     # analyze file
-    if(results.suffix != None):
-        analyze_files(results.open, results.root, results.output, results.suffix)
+    if(args.suffix != None):
+        analyze_files(args.open, args.root, args.output, args.suffix)
     else:
-        analyze_files(results.open, results.root, results.output)
+        analyze_files(args.open, args.root, args.output)
     
     
     
