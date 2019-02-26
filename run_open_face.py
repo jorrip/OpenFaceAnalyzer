@@ -43,18 +43,13 @@ def analyze_files(openface, rootdir, outputdir, suffix = ''):
         i = 0
         for file in list_of_files:
             print("\nStarted analyzing file " + str(i+1) + "\n...")
-            
-            # create folder for current analyzed video
             subprocess.run(['mkdir', os.path.join(outputdir, file)], shell=True) # create an output dir for each analyzed video
             # change current directory (needed for performing openface command)
             with cd(subdirs[i]):
                 subprocess.run(openface + ' -f ' + file + ' -out_dir ' + os.path.join(outputdir, file), shell=True)
-                
             print("Finished analyzing file " + str(i+1))
             i += 1
-    
         print("\nAll files are analyzed! The output is found in " + outputdir)  
-    
     else:
         print("No files to analyze.")
         
